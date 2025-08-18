@@ -1,7 +1,11 @@
-package com.research.assistant.Controller.Service;
+package com.research.assistant.Service;
 
+import lombok.Data;
+
+@Data
 public class ResearchRequest {
     private String content;
     private String operation;
+
 
 }
