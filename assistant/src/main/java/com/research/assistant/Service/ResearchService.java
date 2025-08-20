@@ -1,6 +1,5 @@
 package com.research.assistant.Service;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.research.assistant.DTO.ResearchRequest;
 import com.research.assistant.DTO.GeminiResponse;
@@ -26,10 +25,14 @@ public class ResearchService {
         this.objectMapper = objectMapper;
     }
 
-
     public String processContent(ResearchRequest request) {
         // Build the prompt
         String prompt = buildPrompt(request);
+
+        // 🚨 If prompt is just the error message → return directly (no API call)
+        if ("Please select some text first.".equals(prompt)) {
+            return prompt;
+        }
 
         // Query the AI Model API
         Map<String, Object> requestBody = Map.of(
@@ -47,10 +50,7 @@ public class ResearchService {
                 .bodyToMono(String.class)
                 .block();
 
-
-        // Parse the response
-        // Return response
-
+        // Parse and return response
         return extractTextFromResponse(response);
     }
 
@@ -72,8 +72,9 @@ public class ResearchService {
     }
 
     private String buildPrompt(ResearchRequest request) {
-        if (request.getContent() == null || request.getContent().trim().isEmpty() || request.getContent().equalsIgnoreCase("null")) {
-            return "There is no text to summarize.";
+        if (request.getContent() == null || request.getContent().trim().isEmpty()
+                || request.getContent().equalsIgnoreCase("null")) {
+            return "Please select some text first.";
         }
 
         StringBuilder prompt = new StringBuilder();
@@ -82,7 +83,12 @@ public class ResearchService {
                 prompt.append("Provide a clear and concise summary of the following text in a few sentences:\n\n");
                 break;
             case "suggest":
-                prompt.append("Based on the following content: suggest related topics and further reading. Format the response with clear headings and bullet points:\n\n");
+                prompt.append("Based on the following content: suggest related topics and further reading. ")
+                        .append("Format the response with clear headings and bullet points:\n\n");
+                break;
+            case "improve": // ✅ New operation added
+                prompt.append("Improve the clarity, grammar, and readability of the following text ")
+                        .append("without changing its meaning. Return the improved version:\n\n");
                 break;
             default:
                 throw new IllegalArgumentException("Unknown Operation: " + request.getOperation());
@@ -90,5 +96,4 @@ public class ResearchService {
         prompt.append(request.getContent());
         return prompt.toString();
     }
-
 }
