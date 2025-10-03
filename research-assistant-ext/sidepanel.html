@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Assistant</title>
+    <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+                <div class="toggle-slider">☀️</div>
+            </button>
+            <div class="header-content">
+                <div class="logo">🔍</div>
+                <h1>Research Assistant</h1>
+                <p class="subtitle">AI-Powered Research Tool</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <button class="btn btn-primary" id="summarizeBtn">
+                <span>✨ Summarize</span>
+            </button>
+
+            <div class="alert alert-success" id="successAlert">
+                <strong>✓ Success!</strong> <span id="successMessage"></span>
+            </div>
+
+            <div class="alert alert-error" id="errorAlert">
+                <strong>✗ Error!</strong> <span id="errorMessage"></span>
+            </div>
+
+            <div class="results" id="resultsSection">
+                <div class="results-header">
+                    <h3>📊 Results</h3>
+                </div>
+                <div id="resultsContainer">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <p>No results yet. Click "Summarize" to get started!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notes-section">
+                <div class="notes-header">
+                    <span class="notes-icon">📝</span>
+                    <h2 class="notes-title">Research Notes</h2>
+                </div>
+                <textarea 
+                    class="notes-textarea" 
+                    id="notesTextarea" 
+                    placeholder="Type your research notes here...&#10;&#10;• Key findings&#10;• Important quotes&#10;• Ideas and insights"
+                ></textarea>
+                <button class="btn btn-save" id="saveNotesBtn">
+                    <span>💾 Save Notes</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="sidepanel.js"></script>
+</body>
+</html>

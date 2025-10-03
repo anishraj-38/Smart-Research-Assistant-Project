@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Research Assistant",
+  "version": "1.0.0",
+  "description": "AI-powered research tool to summarize content and take notes",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "sidePanel",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ],
+  "action": {
+    "default_title": "Open Research Assistant"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
