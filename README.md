@@ -5,7 +5,6 @@ No need to switch tabs or copy text — simply **highlight**, **right-click**, a
 
 ---
 
-
 ## 🚀 Features
 
 - 🪄 **Instant Summarization:** Summarizes web articles, blogs, or research papers in one click.  
